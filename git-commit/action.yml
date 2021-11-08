@@ -13,11 +13,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Configure GIT
-      shell: bash
-      run: |
-        git config --global user.email "bot@raycast.com"
-        git config --global user.name "raycastbot"
+    - name: Setup GIT
+      uses: raycast/github-actions/setup-git@v1.1.0
     - name: Commit
       shell: bash
       working-directory: ${{ inputs.repo_dir }}
