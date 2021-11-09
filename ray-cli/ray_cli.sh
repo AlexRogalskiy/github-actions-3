@@ -46,6 +46,7 @@ ray_full_command="ray $ray_command -s $scheme_path --exitOnError"
 ray_cli_log_file="/tmp/capture.out"
 
 exit_code=0
+declare -a 'store_urls'
 
 for dir in "${paths[@]}" ; do
     extension_folder=`basename $dir`
@@ -63,9 +64,27 @@ for dir in "${paths[@]}" ; do
     if [ $last_exit_code -ne 0 ]; then
         error_message=`tr '\n' ' ' < $ray_cli_log_file`
         echo "::error title=$command failed for $extension_folder::$error_message"
+    else
+        if [ "$command" == "publish" ]; then
+            author=`cat package.json | jq -r '.author | values'`
+            owner=`cat package.json | jq -r '.owner | values'`
+            name=`cat package.json | jq -r '.name | values'`
+            if [ ! -z "$owner" ]
+            then
+                store_path="$owner/$name"
+            else
+                store_path="$author/$name"
+            fi
+            store_url="https://raycast.com/$store_path"
+            store_urls+=("$store_url")
+        fi
     fi
     cd $starting_dir
 done
 
-
+store_urls_string=$(printf "%s\n" "${store_urls[@]}")
+store_urls_string="${store_urls_string//'%'/'%25'}"
+store_urls_string="${store_urls_string//$'\n'/'%0A'}"
+store_urls_string="${store_urls_string//$'\r'/'%0D'}"
+echo "::set-output name=store_urls::${store_urls_string}"
 exit $exit_code
