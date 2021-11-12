@@ -52,9 +52,10 @@ for dir in "${paths[@]}" ; do
     extension_folder=`basename $dir`
     printf "\nEntering $dir\n"
     cd "$dir"
-    npm install
-    printf "Executing '$ray_full_command'\n"
     set +e
+    printf "Executing 'npm CI'\n"
+    npm ci --silent
+    printf "Executing '$ray_full_command'\n"
     $ray_full_command 2>&1 | tee $ray_cli_log_file ; test ${PIPESTATUS[0]} -eq 0
     last_exit_code=${?}
     set -e
