@@ -42,7 +42,7 @@ scheme_path="/tmp/raycast/extensions.json"
 curl https://www.raycast.com/schemas/extension.json --create-dirs -o $scheme_path
 
 starting_dir=$PWD
-ray_full_command="ray $ray_command -s $scheme_path --exitOnError"
+ray_full_command="ray $ray_command -v $scheme_path --exitOnError"
 ray_cli_log_file="/tmp/capture.out"
 
 exit_code=0
