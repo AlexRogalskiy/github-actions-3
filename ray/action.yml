@@ -32,7 +32,7 @@ runs:
       uses: raycast/github-actions/setup-cli@v1.2.0
       with:
         access_token: ${{ inputs.access_token }}
-        api_url: ${{ inputs.api_url }}
+        api_url: "https://www.raycast.com/"
     - name: Get command
       id: get_command
       uses: raycast/github-actions/get-command@v1.2.0
