@@ -19,6 +19,7 @@ runs:
       uses: tj-actions/changed-files@v13
       with:
         base_sha: ${{ github.event.pull_request.base.sha }}
+        sha: ${{ github.event.pull_request.head.sha }}
     - name: Get paths
       shell: bash
       id: get_paths
