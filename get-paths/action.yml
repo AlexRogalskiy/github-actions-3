@@ -16,7 +16,7 @@ runs:
   steps:
     - name: Get changed files
       id: changed-files
-      uses: tj-actions/changed-files@v12
+      uses: tj-actions/changed-files@v13
     - name: Get paths
       shell: bash
       id: get_paths
