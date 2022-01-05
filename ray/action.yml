@@ -34,7 +34,7 @@ runs:
     - name: Setup CLI
       uses: raycast/github-actions/setup-cli@v1.5.0
       with:
-        version: ${{ inputs.cli_version || '1.1.0' }}
+        version: ${{ inputs.cli_version || '1.2.0' }}
         access_token: ${{ inputs.access_token }}
         api_url: "https://www.raycast.com/"
     - name: Get command
