@@ -56,18 +56,22 @@ for dir in "${paths[@]}" ; do
     printf "\nEntering $dir\n"
     cd "$dir"
 
+    #install npm
+    npm ci --silent
+
     set +e
     $ray_validate 2>&1 | tee $ray_ci_log_file ; test ${PIPESTATUS[0]} -eq 0
     last_exit_code=${?}
     set -e
     if [ $last_exit_code -eq 0 ]; then
         set +e
-        npm ci --silent
         $ray_build_publish 2>&1 | tee $ray_ci_log_file ; test ${PIPESTATUS[0]} -eq 0
         last_exit_code=${?}
         set -e
-        rm -rf ./node_modules
     fi
+
+    #cleanup npm
+    rm -rf ./node_modules
 
     if [ $exit_code -eq 0 ]; then
         exit_code=$last_exit_code
