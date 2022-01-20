@@ -23,6 +23,10 @@ runs:
           git add .
           git status .
           git commit --message "${{ inputs.message }}"
+
+          branch_name=$(git rev-parse --abbrev-ref HEAD)
+          git fetch origin $branch_name
+          git rebase origin/$branch_name
           git push -u origin HEAD
         else
           echo "No changes, skipping sync."
