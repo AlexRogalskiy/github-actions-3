@@ -9,6 +9,9 @@ inputs:
   repo_dir:
     description: "Directory to add & commit"
     required: true
+  auto_resolve_conflicts:
+    description: "Use '-X ours' on rebase"
+    required: false
 
 runs:
   using: "composite"
@@ -25,8 +28,9 @@ runs:
           git commit --message "${{ inputs.message }}"
 
           branch_name=$(git rev-parse --abbrev-ref HEAD)
+          git_conflicts="" && [[ ${{ inputs.auto_resolve_conflicts }} == true ]] && git_conflicts="-X ours"
           git fetch origin $branch_name
-          git rebase origin/$branch_name
+          git rebase origin/$branch_name $git_conflicts
           git push -u origin HEAD
         else
           echo "No changes, skipping sync."
