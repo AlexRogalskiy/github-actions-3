@@ -31,7 +31,7 @@ runs:
           git_conflicts="" && [[ "${{ inputs.auto_resolve_conflicts }}" == true ]] && git_conflicts="-X ours"
           git fetch origin $branch_name
           git rebase origin/$branch_name $git_conflicts
-          git push -u origin HEAD
+          git push -u origin $branch_name
         else
           echo "No changes, skipping sync."
         fi
