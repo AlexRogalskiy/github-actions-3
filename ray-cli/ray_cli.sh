@@ -42,8 +42,8 @@ scheme_path="/tmp/raycast/extensions.json"
 curl https://www.raycast.com/schemas/extension.json --create-dirs -o $scheme_path
 
 starting_dir=$PWD
-ray_validate="ray validate -s $scheme_path --exitOnError"
-ray_build_publish="ray $ray_command --exitOnError"
+ray_validate="ray validate -s $scheme_path --non-interactive --emoji --exit-on-error"
+ray_build_publish="ray $ray_command --skip-validation --non-interactive --emoji --exit-on-error"
 ray_ci_log_file="/tmp/raycast/ray_cli.log"
 
 last_exit_code=0

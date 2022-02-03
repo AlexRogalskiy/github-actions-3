@@ -1,23 +1,23 @@
-name: 'Raycast CLI'
+name: "Raycast CLI"
 
-description: 'Raycast CLI'
+description: "Raycast CLI"
 
 inputs:
   paths:
-    description: 'Paths to execute on'
+    description: "Paths to execute on"
     required: true
   command:
-    description: 'Ray CLI command (build | publish)'
+    description: "Ray CLI command (build | publish)"
     required: true
 outputs:
   store_urls:
-    description: 'Store URLs for published extensions'
+    description: "Store URLs for published extensions"
     value: ${{ steps.ray_cli.outputs.store_urls }}
 runs:
   using: "composite"
   steps:
     - name: Install npm
-      uses: raycast/github-actions/setup-npm@v1.5.0
+      uses: raycast/github-actions/setup-npm@v1.6.0
     - name: Execute command
       shell: bash
       id: ray_cli
