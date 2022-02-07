@@ -23,7 +23,7 @@ function ray_command_from_string() {
         ;;
 
         publish)
-        ray_command="publish -f"
+        ray_command="publish --skip-validation"
         ;;
 
         *)
@@ -43,7 +43,7 @@ curl https://www.raycast.com/schemas/extension.json --create-dirs -o $scheme_pat
 
 starting_dir=$PWD
 ray_validate="ray validate -s $scheme_path --non-interactive --emoji --exit-on-error"
-ray_build_publish="ray $ray_command --skip-validation --non-interactive --emoji --exit-on-error"
+ray_build_publish="ray $ray_command --non-interactive --emoji --exit-on-error"
 ray_ci_log_file="/tmp/raycast/ray_cli.log"
 
 last_exit_code=0
