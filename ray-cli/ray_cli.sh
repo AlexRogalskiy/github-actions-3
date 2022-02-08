@@ -19,11 +19,13 @@ fi
 function ray_command_from_string() {
     case $1 in
         build)
-        ray_command="build -e dist --withoutToken"
+        ray_command="build -e dist"
+        without_token="--withoutToken"
         ;;
 
         publish)
         ray_command="publish --skip-validation"
+        without_token=""
         ;;
 
         *)
@@ -42,7 +44,7 @@ scheme_path="/tmp/raycast/extensions.json"
 curl https://www.raycast.com/schemas/extension.json --create-dirs -o $scheme_path
 
 starting_dir=$PWD
-ray_validate="ray validate -s $scheme_path --non-interactive --emoji --exit-on-error"
+ray_validate="ray validate -s $scheme_path $without_token --non-interactive --emoji --exit-on-error"
 ray_build_publish="ray $ray_command --non-interactive --emoji --exit-on-error"
 ray_ci_log_file="/tmp/raycast/ray_cli.log"
 
