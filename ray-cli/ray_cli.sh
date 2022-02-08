@@ -19,7 +19,7 @@ fi
 function ray_command_from_string() {
     case $1 in
         build)
-        ray_command="build -e dist"
+        ray_command="build -e dist --withoutToken"
         ;;
 
         publish)
