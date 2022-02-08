@@ -20,7 +20,7 @@ function ray_command_from_string() {
     case $1 in
         build)
         ray_command="build -e dist"
-        without_token="--withoutToken"
+        without_token="--skip-owner"
         ;;
 
         publish)
